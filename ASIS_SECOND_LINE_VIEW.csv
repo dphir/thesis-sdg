@@ -1,0 +1,2 @@
+transaction_id,customer_id,transaction_amount,transaction_date,transaction_type,sender_country,receiver_country,channel,account_id,line,first_name,surname,gender,date_of_birth,age,marital,education,job,income,contact,geography,balance,has_cr_card,default,housing,loan,credit_score,tenure,dt_customer,basic_suspicious_flag,compliance_decision
+TX001994,C1001,568.68,2023-04-25 18:47:16,Debit,Mexico,Estonia,ATM,EE123211568472519237,SECOND_LINE,Lauren,Shaw,Male,1984-04-09,41,DIVORCED,UNIVERSITY,admin.,64892.0,LANDLINE,Spain,0.0,1,UNKNOWN,YES,NO,598,11,2014-05-29,False,NORMAL
