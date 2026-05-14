@@ -10,6 +10,7 @@ This repository contains the full simulation pipeline for the thesis, which inve
 
 ## Repository Structure
 
+```
 thesis-sdg/
 ├── notebooks/          ← final simulation pipeline
 │   ├── 01_as_is_simulation.ipynb
@@ -19,6 +20,7 @@ thesis-sdg/
 │   └── figures/
 ├── requirements.txt
 └── README.md
+```
 
 ## Environment
 
