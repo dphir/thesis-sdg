@@ -1,118 +1,59 @@
-# Thesis Project: Synthetic Data Generation for GRC Audit
+# From Data Silos to Integrated Assurance: A Synthetic Data Approach to the Three Lines Model for Governance, Risk, and Compliance
 
-This repository contains the **as-is GRC data views, ETL preprocessing notebooks, and generated outputs** used to simulate fragmented data flows across the **Three Lines of Defense (3LOD). ****
-These datasets represent the baseline condition **before** applying the synthetic data architecture proposed in the thesis.
+Master's Thesis — University of Tartu, 2026
+Author: Defir Ilmi Faridha
+Supervisors: Mahmoud Shoush, PhD & Eduardo Ribas Brito, MSc
 
-## **1. Overview**
+## Overview
 
-Large organizations often suffer from **data silos, restricted access, and fragmented reporting** across the Business (1st Line), risk and compliance (2nd Line), and Internal Audit (3rd Line).
+This repository contains the full simulation pipeline for the thesis, which investigates whether synthetic data can resolve the governance–privacy paradox in GRC environments by enabling privacy-preserving, collaborative data access across the Three Lines Model (3LM).
 
-This repository illustrates:
+## Repository Structure
 
-- How operational, risk, and audit data are **separated** in the AS-IS environment
-
-- How each line receives a different **view** of the same organizational dataset
-
-- How audits become slow, incomplete, and costly due to **limited data flows**
-
-- The **baseline dataset** used to build the upcoming **Synthetic Data Twin**
-
-This repository, therefore, serves as the foundation for evaluating a more efficient and privacy-preserving audit approach using synthetic data generation.
-
-## **2. Repository Structure**
-```
 thesis-sdg/
-│
-├── data/
-│   ├── raw/                         # Public or external raw input datasets
-│   ├── processed/                   # ETL outputs and master tables
-│   │   └── TRANSACTION_MASTER_FULL.csv
-│   └── asis_views/                  # AS-IS GRC views & reports for 3 Lines of Defense
-│       ├── ASIS_1ST_LINE_REPORT.csv
-│       ├── ASIS_2ND_LINE_REPORT.csv
-│       ├── ASIS_3RD_LINE_REPORT.csv
-│       ├── ASIS_FIRST_LINE_VIEW.csv
-│       ├── ASIS_SECOND_LINE_VIEW.csv
-│       └── ASIS_THIRD_LINE_VIEW.csv
-│
-├── notebooks/
-│   ├── 01_customer_data_upload.ipynb
-│   ├── 02_transaction_data_upload.ipynb
-│   └── 03_the_process_upload.ipynb
-│
-├── src/
-│   ├── etl/                         # ETL scripts (optional future refactor)
-│   ├── sdg/                         # Synthetic data generation modules (future)
-│   └── utils/                       # Helper functions
-│
-├── docs/
-│   ├── diagrams/                    # Architecture diagrams & thesis figures
-│   └── thesis-outline.md            # Notes related to thesis structure
-│
-├── .gitignore
+├── notebooks/          ← final simulation pipeline
+│   ├── 01_as_is_simulation.ipynb
+│   ├── 02_synthetic_data_generation.ipynb
+│   └── 03_to_be_simulation.ipynb
+├── outputs/
+│   └── figures/
 ├── requirements.txt
 └── README.md
-```
 
-## **3. File Descriptions**
+## Environment
 
-These CSV files represent the AS-IS fragmented GRC environment.
+| Component | Details |
+|-----------|---------|
+| CPU | AMD Ryzen 5 3550H (2.10 GHz) |
+| GPU | NVIDIA GeForce GTX 1050 (CUDA) |
+| RAM | 16 GB |
+| Python | 3.12.3 |
+| Notebook | Jupyter Notebook |
 
-| File Name                       | Description                                                                          |
-| ------------------------------- | ------------------------------------------------------------------------------------ |
-| **ASIS_1ST_LINE_REPORT.csv**    | Operational-level report used by Business / Operations / IT (1st Line).              |
-| **ASIS_2ND_LINE_REPORT.csv**    | Risk & Compliance report containing alerts, scoring, and monitoring data (2nd Line). |
-| **ASIS_3RD_LINE_REPORT.csv**    | Internal Audit report summarizing anomalies, gaps, and audit findings (3rd Line).    |
-| **ASIS_FIRST_LINE_VIEW.csv**    | Data view accessible to the First Line (operational subset).                         |
-| **ASIS_SECOND_LINE_VIEW.csv**   | Data view accessible to the Second Line (risk/compliance enriched subset).           |
-| **ASIS_THIRD_LINE_VIEW.csv**    | Restricted data view accessible only to Internal Audit.                              |
-| **TRANSACTION_MASTER_FULL.csv** | Full transaction master table generated from ETL preprocessing (baseline for SDG).   |
+## Dependencies
 
+Install dependencies via:
 
-## **4. Jupyter Notebooks (ETL + Simulation Code)**
+pip install -r requirements.txt
 
-These notebooks generate and preprocess all datasets above.
+> **Note:** A dedicated virtual environment is strongly recommended due to potential dependency conflicts between SynthCity, SynthEval, and other packages. Conflict resolution may vary depending on your system environment.
 
-| Notebook                          | Purpose                                                                                                  |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| **Customer_Data_upload.ipynb**    | Preprocessing of customer master data, cleaning, merging, formatting, and attribute engineering.         |
-| **Transaction_Data_upload.ipynb** | ETL pipeline for transaction data, integration with customer profiles, and creation of the master table. |
-| **The_Process_upload.ipynb**      | Simulation of AS-IS GRC data flows. Generates First/Second/Third Line *views* and *reports*.             |
+## Reproducing the Experiments
 
-## **5. Purpose of These Outputs**
-The AS-IS datasets are essential for:
-- Demonstrating data fragmentation in traditional GRC processes
-- Showing how limited access impacts risk visibility and audit quality
-- Providing a baseline scenario for comparison with the proposed synthetic data solution
-- Feeding the next steps of the thesis:
-  - Synthetic Data Generation (SDG)
-  - Synthetic Twin Architecture
-  - Privacy-Preserving Audit Simulation
- 
-## **6. Workflow Summary**
+All experiments use a fixed random seed of 42 throughout sampling, model training, and generation.
 
-**Step 1 — Customer ETL**
+1. Run `01_as_is_simulation.ipynb` — segmented (3LoD) governance simulation on real baseline data with IT-mediated access. Includes stratified sampling to produce a representative baseline of 100 customers due to hardware constraints. If sufficient compute is available, stratified sampling can be skipped to run on the full dataset.
+2. Run `02_synthetic_data_generation.ipynb` — generates synthetic customer and transaction data using TabDDPM via SynthCity from the baseline produced in step 1, with built-in fidelity, utility, and privacy evaluation. Independent validation is performed using SynthEval.
+3. Run `03_to_be_simulation.ipynb` — collaborative (3LM) governance simulation on synthetic data with direct shared access.
 
-- Parse customer data
-- Clean & standardize fields
-- Derive new attributes
-- Save processed master
+Simulation outputs and figures from SynthCity and SynthEval are available in `outputs/figures/` for reference without re-running the full pipeline.
 
-**Step 2 — Transaction ETL**
+## Data Availability
 
-- Load transaction logs
-- Merge with customer tables
-- Add AML/risk-related derived features
-- Export TRANSACTION_MASTER_FULL.csv
+The original dataset cannot be shared due to privacy constraints. The simulation logic — including threshold parameters, baseline calibration, and escalation rules — was designed based on the characteristics of the available dataset. Researchers applying this pipeline to different datasets or operational contexts should expect to adjust these parameters accordingly.
 
-**Step 3 — AS-IS GRC Simulation**
+## Citation
 
-- Split the master dataset by 3LOD roles
-- Generate line-specific views & reports
-- Demonstrate siloed information flow
+If you use this code, please cite:
 
-## **7. Privacy Notes**
-
-- All datasets in this repository are **synthetically generated or derived from public sources.**
-- No real customer or transaction information is included.
-- These files are intended exclusively for academic research and demonstration purposes.
+Faridha, D. I. (2026). From Data Silos to Integrated Assurance: A Synthetic Data Approach to the Three Lines Model for Governance, Risk, and Compliance. Master's Thesis, University of Tartu.
