@@ -30,15 +30,18 @@ thesis-sdg/
 | GPU | NVIDIA GeForce GTX 1050 (CUDA) |
 | RAM | 16 GB |
 | Python | 3.12.3 |
+| Environment | Anaconda |
 | Notebook | Jupyter Notebook |
 
-## Dependencies
+Create a conda environment and install dependencies:
 
-Install dependencies via:
-
+```bash
+conda create -n thesis-sdg python=3.12.3
+conda activate thesis-sdg
 pip install -r requirements.txt
+```
 
-> **Note:** A dedicated virtual environment is strongly recommended due to potential dependency conflicts between SynthCity, SynthEval, and other packages. Conflict resolution may vary depending on your system environment.
+> **Note:** A dedicated environment is strongly recommended due to potential dependency conflicts between SynthCity, SynthEval, and other packages. Conflict resolution may vary depending on your system environment.
 
 ## Reproducing the Experiments
 
