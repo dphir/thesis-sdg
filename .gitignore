@@ -211,4 +211,5 @@ __marimo__/
 # Project specific
 *.csv
 *.bkp
+*.json
 workspace/
