@@ -12,14 +12,16 @@ This repository contains the full simulation pipeline for the thesis, which inve
 
 ```
 thesis-sdg/
-├── notebooks/          ← final simulation pipeline
+├── .git
+├── .gitignore
+├── README.md
+├── requirements.txt
+├── notebooks/
 │   ├── 01_as_is_simulation.ipynb
 │   ├── 02_synthetic_data_generation.ipynb
 │   └── 03_to_be_simulation.ipynb
-├── outputs/
-│   └── figures/
-├── requirements.txt
-└── README.md
+└── outputs/
+    └── figures/
 ```
 
 ## Environment
