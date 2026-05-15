@@ -62,3 +62,5 @@ The original dataset cannot be shared due to privacy constraints. The simulation
 If you use this code, please cite:
 
 Faridha, D. I. (2026). From Data Silos to Integrated Assurance: A Synthetic Data Approach to the Three Lines Model for Governance, Risk, and Compliance. Master's Thesis, University of Tartu.
+
+Full thesis available at: [https://thesis.cs.ut.ee/f12151b2-c92a-41f4-9e55-d621cb954c14]
