@@ -12,7 +12,6 @@ This repository contains the full simulation pipeline for the thesis, which inve
 
 ```
 thesis-sdg/
-├── .git
 ├── .gitignore
 ├── README.md
 ├── requirements.txt
