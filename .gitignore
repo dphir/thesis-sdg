@@ -212,4 +212,5 @@ __marimo__/
 *.csv
 *.bkp
 *.json
+.ipynb_checkpoints
 workspace/
